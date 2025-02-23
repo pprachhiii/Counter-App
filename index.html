@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter App</title>
+</head>
+<body>
+    <input type="number" class="input" >
+    <input type="number" class="counter" placeholder="add the increment/decrement value">
+    <button class="inc" disabled>+</button>
+    <button class="dec" disabled>-</button>
+    <button class="reset">C</button>
+    <script>
+        const inc=document.querySelector(".inc");
+        const dec=document.querySelector(".dec");
+        const reset=document.querySelector(".reset");
+        const input=document.querySelector(".input");
+        const counter=document.querySelector(".counter");
+
+        const updateColor = () =>{
+            if(Number(input.value)>0){
+                input.style.color="green";
+            }else if(Number(input.value)<0){
+                input.style.color="red";
+            }else{
+                input.style.color="black";
+            }
+        }
+         
+        counter.addEventListener("input",()=>{
+            if(counter.value.trim()!=="" && Number(counter.value)!==0){
+                inc.disabled=false;
+                dec.disabled=false;
+            }else{
+                inc.disabled=true;
+                dec.disabled=true;
+            }
+        });
+
+        inc.addEventListener("click",()=>{
+           const step = Number(counter.value) || 1;
+           input.value=Number(input.value)+step;
+           updateColor();
+        });
+        dec.addEventListener("click",()=>{
+            const step = Number(counter.value) || 1;
+            input.value=Number(input.value)-step;
+            updateColor();
+        });
+        reset.addEventListener("click",()=>{
+            input.value=0;
+            counter.value=0;
+            inc.disabled=true;
+            dec.disabled=true;
+            updateColor();
+
+        });
+        updateColor();
+    </script>
+</body>
+</html>
